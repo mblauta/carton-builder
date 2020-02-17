@@ -161,14 +161,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartonController.cs" />
-    <Compile Include="EntityModels\Carton.cs" />
-    <Compile Include="CartonContext.cs" />
-    <Compile Include="EntityModels\CartonDetail.cs" />
-    <Compile Include="EntityModels\Equipment.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="EntityModels\ModelType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\RemoveEquipmentViewModel.cs" />
     <Compile Include="ViewModels\AddEquipmentViewModel.cs" />
@@ -242,6 +237,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CartonBuilder.Data\CartonBuilder.Data.csproj">
+      <Project>{69a9c4de-2659-44b6-b346-9014a8e0b7cf}</Project>
+      <Name>CartonBuilder.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

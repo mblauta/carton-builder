@@ -1,4 +1,4 @@
-namespace CartonBuilder.Web.EntityModels
+namespace CartonBuilder.Data.EntityModels
 {
     using System.ComponentModel.DataAnnotations.Schema;
 

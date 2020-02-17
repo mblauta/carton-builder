@@ -1,4 +1,4 @@
-namespace CartonBuilder.Web
+namespace CartonBuilder.Data
 {
     using EntityModels;
     using System.Data.Entity;

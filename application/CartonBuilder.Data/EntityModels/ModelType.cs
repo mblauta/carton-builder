@@ -1,25 +1,25 @@
-namespace CartonBuilder.Web.EntityModels
+namespace CartonBuilder.Data.EntityModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("Carton")]
-    public partial class Carton
+    [Table("ModelType")]
+    public partial class ModelType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Carton()
+        public ModelType()
         {
-            CartonDetails = new HashSet<CartonDetail>();
+            Equipments = new HashSet<Equipment>();
         }
 
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string CartonNumber { get; set; }
+        public string TypeName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<CartonDetail> CartonDetails { get; set; }
+        public ICollection<Equipment> Equipments { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CartonBuilder.Web.EntityModels;
-using CartonBuilder.Web.ViewModels;
+﻿using CartonBuilder.Web.ViewModels;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
