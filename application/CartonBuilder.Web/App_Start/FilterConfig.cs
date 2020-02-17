@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace CandidateProject
+namespace CartonBuilder.Web
 {
     public class FilterConfig
     {

@@ -1,12 +1,12 @@
-﻿using CandidateProject.EntityModels;
-using CandidateProject.ViewModels;
+﻿using CartonBuilder.Web.EntityModels;
+using CartonBuilder.Web.ViewModels;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
-namespace CandidateProject.Controllers
+namespace CartonBuilder.Web.Controllers
 {
     public class CartonController : Controller
     {

@@ -1,4 +1,4 @@
-﻿namespace CandidateProject.ViewModels
+﻿namespace CartonBuilder.Web.ViewModels
 {
     public class CartonViewModel
     {

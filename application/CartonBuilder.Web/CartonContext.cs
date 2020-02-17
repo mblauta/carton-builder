@@ -1,4 +1,4 @@
-namespace CandidateProject
+namespace CartonBuilder.Web
 {
     using EntityModels;
     using System.Data.Entity;
