@@ -166,7 +166,7 @@ namespace CartonBuilder.Web.Controllers
 
         #endregion Delete
 
-        // TODO: GET: Carton/5/ListAvailableEquipment
+        // GET: Carton/5/ListAvailableEquipment
         public ActionResult ListAvailableEquipment(int? id)
         {
             // Early exit if the carton ID is not provided. There's really nothing to do.
@@ -192,36 +192,28 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonListAvailableEquipmentViewModel);
         }
 
-        // TODO: GET: Carton/5/AddEquipment
-        public ActionResult AddEquipmentToCarton([Bind(Include = "CartonId, EquipmentId")] AddEquipmentViewModel addEquipmentViewModel)
+        // GET: Carton/5/AddEquipment/9
+        public ActionResult AddEquipment(int cartonId, int equipmentId)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //if (ModelState.IsValid)
-            //{
-            //    var carton = db.Cartons
-            //        .Include(c => c.CartonDetails)
-            //        .Where(c => c.Id == addEquipmentViewModel.CartonId)
-            //        .SingleOrDefault();
-            //    if (carton == null)
-            //    {
-            //        return HttpNotFound();
-            //    }
-            //    var equipment = db.Equipments
-            //        .Where(e => e.Id == addEquipmentViewModel.EquipmentId)
-            //        .SingleOrDefault();
-            //    if (equipment == null)
-            //    {
-            //        return HttpNotFound();
-            //    }
-            //    var detail = new Data.EntityModels.CartonDetail()
-            //    {
-            //        Carton = carton,
-            //        Equipment = equipment
-            //    };
-            //    carton.CartonDetails.Add(detail);
-            //    db.SaveChanges();
-            //}
-            //return RedirectToAction("AddEquipment", new { id = addEquipmentViewModel.CartonId });
+            // Retrieve the carton with the ID provided. This also ensures that we have a
+            // valid carton to add equipment to.
+            var carton = _cartonService.GetCarton(cartonId);
+            if (carton == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Retrieve the equipment with the ID provided. This also ensures that we are
+            // adding a valid equipment to the carton.
+            var equipment = _equipmentService.GetEquipment(equipmentId);
+            if (equipment == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Add equipment to carton...
+            _equipmentService.AddEquipmentToCarton(cartonId, equipmentId);
+            return RedirectToRoute("CartonCommand", new { id = cartonId, action = "ListAvailableEquipment" });
         }
 
         // ##################################################################################################

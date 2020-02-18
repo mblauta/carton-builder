@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().ModelType)
+            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().ModelType.TypeName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().SerialNumber)
@@ -22,13 +22,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ModelType)
+                @Html.DisplayFor(modelItem => item.ModelType.TypeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SerialNumber)
             </td>
             <td>
-                @Html.ActionLink("Add", "AddEquipmentToCarton", new { cartonId = Model.Carton.Id, equipmentId = item.Id })
+                @Html.RouteLink("Add", "CartonAddEquipment", new { cartonId = Model.Carton.Id, equipmentId = item.Id })
             </td>
         </tr>
     }

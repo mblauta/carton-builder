@@ -7,6 +7,37 @@ namespace CartonBuilder.Data.Services
     public class EquipmentService
     {
         /// <summary>
+        /// Gets the equipment that matches the given ID.
+        /// </summary>
+        /// <param name="equipmentId">ID of equipment to look for.</param>
+        /// <returns>
+        /// Returns an equipment that matches the given ID. If the ID is not found
+        /// in the data store, NULL is returned.
+        /// </returns>
+        public Equipment GetEquipment(int equipmentId)
+        {
+            using (var warehouseContext = new WarehouseContext())
+            {
+                Equipment equipment = (from e in warehouseContext.Equipments
+                                       join mt in warehouseContext.ModelTypes on e.ModelTypeId equals mt.Id into tmp
+                                       from mt in tmp.DefaultIfEmpty()
+                                       where e.Id == equipmentId
+                                       select new Equipment()
+                                       {
+                                           Id = e.Id,
+                                           SerialNumber = e.SerialNumber,
+                                           ModelType = new ModelType()
+                                           {
+                                               Id = mt.Id,
+                                               TypeName = mt.TypeName
+                                           }
+                                       })
+                                      .SingleOrDefault();
+                return equipment;
+            }
+        }
+
+        /// <summary>
         /// Lists all the equipment currently in the data store that can be added to the carton.
         /// </summary>
         /// <returns>Returns a list of equipment.</returns>
@@ -19,17 +50,39 @@ namespace CartonBuilder.Data.Services
                                                           .Where(cd => cd.CartonId == cartonId)
                                                           .Select(cd => cd.EquipmentId);
 
-                List<Equipment> equipmentList = warehouseContext.Equipments
-                                                   .Where(e => !equipmentIdsInCarton.Contains(e.Id))
-                                                   .Select(e => new Equipment()
-                                                   {
-                                                       Id = e.Id,
-                                                       ModelType = e.ModelType.TypeName,
-                                                       SerialNumber = e.SerialNumber
-                                                   })
-                                                   .ToList();
+                List<Equipment> equipmentList = (from e in warehouseContext.Equipments
+                                                 join mt in warehouseContext.ModelTypes on e.ModelTypeId equals mt.Id into tmp
+                                                 from mt in tmp.DefaultIfEmpty()
+                                                 where !equipmentIdsInCarton.Contains(e.Id)
+                                                 select new Equipment()
+                                                 {
+                                                     Id = e.Id,
+                                                     SerialNumber = e.SerialNumber,
+                                                     ModelType = new ModelType()
+                                                     {
+                                                         Id = mt.Id,
+                                                         TypeName = mt.TypeName
+                                                     }
+                                                 })
+                                                .ToList();
 
                 return equipmentList;
+            }
+        }
+
+        public int AddEquipmentToCarton(int cartonId, int equipmentId)
+        {
+            using (var warehouseContext = new WarehouseContext())
+            {
+                var cartonDetailEntityModel = new EntityModels.CartonDetail()
+                {
+                    CartonId = cartonId,
+                    EquipmentId = equipmentId
+                };
+                EntityModels.CartonDetail newCartonDetailEntityModel = warehouseContext.CartonDetails.Add(cartonDetailEntityModel);
+                warehouseContext.SaveChanges();
+
+                return newCartonDetailEntityModel.Id;
             }
         }
     }
