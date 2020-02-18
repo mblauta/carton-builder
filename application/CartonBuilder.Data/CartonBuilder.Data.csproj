@@ -69,6 +69,7 @@
     <Compile Include="EntityModels\Equipment.cs" />
     <Compile Include="EntityModels\ModelType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CartonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,6 +86,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CartonBuilder.Models\CartonBuilder.Models.csproj">
+      <Project>{18f9dc02-2322-4a39-8e95-5deabe9e71a2}</Project>
+      <Name>CartonBuilder.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
