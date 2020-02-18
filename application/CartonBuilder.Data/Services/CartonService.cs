@@ -57,7 +57,7 @@ namespace CartonBuilder.Data.Services
         /// <returns>Returns the ID of the newly added carton.</returns>
         public int AddCarton(Carton carton)
         {
-            // Throw exception if no carton was provided.
+            // Throw exception if no carton was provided. Nothing to do here.
             if (carton == null)
             {
                 throw new ArgumentNullException("carton", "Carton is required but was not provided.");
@@ -75,6 +75,30 @@ namespace CartonBuilder.Data.Services
                 cartonContext.SaveChanges();
 
                 return newCarton.Id;
+            }
+        }
+
+        /// <summary>
+        /// Updates the carton details for a given ID.
+        /// </summary>
+        /// <param name="carton">The carton details to save.</param>
+        /// <remarks>
+        /// Note that the value passed in the 'Id' field will be used to search for the corresponding
+        /// record to update.
+        /// </remarks>
+        public void UpdateCarton(Carton carton)
+        {
+            // Throw exception if no carton was provided. Nothing to do here.
+            if (carton == null)
+            {
+                throw new ArgumentNullException("carton", "Carton is required but was not provided.");
+            }
+
+            using (var cartonContext = new CartonContext())
+            {
+                EntityModels.Carton cartonEntityModel = cartonContext.Cartons.Find(carton.Id);
+                cartonEntityModel.CartonNumber = carton.CartonNumber;
+                cartonContext.SaveChanges();
             }
         }
     }

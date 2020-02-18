@@ -68,41 +68,44 @@ namespace CartonBuilder.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CartonNumber")] Carton carton)
+        public ActionResult Create([Bind(Include = "Id, CartonNumber")] CartonCreateViewModel cartonCreateViewModel)
         {
             if (ModelState.IsValid)
             {
-                _cartonService.AddCarton(carton);
+                _cartonService.AddCarton(cartonCreateViewModel);
                 return RedirectToAction("Index");
             }
 
-            return View(carton);
+            return View(cartonCreateViewModel);
         }
 
         #endregion Create
 
+        #region Edit
+
         // GET: Carton/Edit/5
         public ActionResult Edit(int? id)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            // Early exit if the carton ID is not provided. There's really nothing to do.
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //var carton = db.Cartons
-            //    .Where(c => c.Id == id)
-            //    .Select(c => new CartonViewModel()
-            //    {
-            //        //Id = c.Id,
-            //        //CartonNumber = c.CartonNumber
-            //    })
-            //    .SingleOrDefault();
-            //if (carton == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(carton);
+            // Retrieve the carton for the given ID...
+            var carton = _cartonService.GetCarton(id.Value);
+            if (carton == null)
+            {
+                return HttpNotFound();
+            }
+
+            var cartonEditViewModel = new CartonEditViewModel()
+            {
+                Id = carton.Id,
+                CartonNumber = carton.CartonNumber
+            };
+
+            return View(cartonEditViewModel);
         }
 
         // POST: Carton/Edit/5
@@ -110,19 +113,18 @@ namespace CartonBuilder.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CartonNumber")] CartonViewModel cartonViewModel)
+        public ActionResult Edit([Bind(Include = "Id, CartonNumber")] CartonEditViewModel cartonEditViewModel)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (ModelState.IsValid)
+            {
+                _cartonService.UpdateCarton(cartonEditViewModel);
+                return RedirectToAction("Index");
+            }
 
-            //if (ModelState.IsValid)
-            //{
-            //    //var carton = db.Cartons.Find(cartonViewModel.Id);
-            //    //carton.CartonNumber = cartonViewModel.CartonNumber;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //return View(cartonViewModel);
+            return View(cartonEditViewModel);
         }
+
+        #endregion Edit
 
         // GET: Carton/Delete/5
         public ActionResult Delete(int? id)
