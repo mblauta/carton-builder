@@ -196,18 +196,6 @@ namespace CartonBuilder.Web.Controllers
         // ##################################################################################################
         // ##################################################################################################
 
-        private WarehouseContext db = new WarehouseContext();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-
         public ActionResult AddEquipmentToCarton([Bind(Include = "CartonId,EquipmentId")] AddEquipmentViewModel addEquipmentViewModel)
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
