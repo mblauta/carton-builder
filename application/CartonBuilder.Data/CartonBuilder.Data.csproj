@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CartonContext.cs" />
+    <Compile Include="WarehouseContext.cs" />
     <Compile Include="EntityModels\Carton.cs" />
     <Compile Include="EntityModels\CartonDetail.cs" />
     <Compile Include="EntityModels\Equipment.cs" />

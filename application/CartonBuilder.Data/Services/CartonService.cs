@@ -13,9 +13,9 @@ namespace CartonBuilder.Data.Services
         /// <returns>Returns a list of cartons.</returns>
         public List<Carton> ListCartons()
         {
-            using (var cartonContext = new CartonContext())
+            using (var warehouseContext = new WarehouseContext())
             {
-                List<Carton> cartons = cartonContext.Cartons
+                List<Carton> cartons = warehouseContext.Cartons
                                          .Select(c => new Carton()
                                          {
                                              Id = c.Id,
@@ -36,9 +36,9 @@ namespace CartonBuilder.Data.Services
         /// </returns>
         public Carton GetCarton(int cartonId)
         {
-            using (var cartonContext = new CartonContext())
+            using (var warehouseContext = new WarehouseContext())
             {
-                Carton carton = cartonContext.Cartons
+                Carton carton = warehouseContext.Cartons
                                     .Where(c => c.Id == cartonId)
                                     .Select(c => new Carton()
                                     {
@@ -63,7 +63,7 @@ namespace CartonBuilder.Data.Services
                 throw new ArgumentNullException("carton", "Carton is required but was not provided.");
             }
 
-            using (var cartonContext = new CartonContext())
+            using (var warehouseContext = new WarehouseContext())
             {
                 var cartonEntityModel = new EntityModels.Carton()
                 {
@@ -71,8 +71,8 @@ namespace CartonBuilder.Data.Services
                     CartonNumber = carton.CartonNumber
                 };
 
-                var newCarton = cartonContext.Cartons.Add(cartonEntityModel);
-                cartonContext.SaveChanges();
+                var newCarton = warehouseContext.Cartons.Add(cartonEntityModel);
+                warehouseContext.SaveChanges();
 
                 return newCarton.Id;
             }
@@ -94,11 +94,11 @@ namespace CartonBuilder.Data.Services
                 throw new ArgumentNullException("carton", "Carton is required but was not provided.");
             }
 
-            using (var cartonContext = new CartonContext())
+            using (var warehouseContext = new WarehouseContext())
             {
-                EntityModels.Carton cartonEntityModel = cartonContext.Cartons.Find(carton.Id);
+                EntityModels.Carton cartonEntityModel = warehouseContext.Cartons.Find(carton.Id);
                 cartonEntityModel.CartonNumber = carton.CartonNumber;
-                cartonContext.SaveChanges();
+                warehouseContext.SaveChanges();
             }
         }
 
@@ -108,11 +108,11 @@ namespace CartonBuilder.Data.Services
         /// <param name="cartonId">ID of carton to remove.</param>
         public void RemoveCarton(int cartonId)
         {
-            using (var cartonContext = new CartonContext())
+            using (var warehouseContext = new WarehouseContext())
             {
-                EntityModels.Carton cartonEntityModel = cartonContext.Cartons.Find(cartonId);
-                cartonContext.Cartons.Remove(cartonEntityModel);
-                cartonContext.SaveChanges();
+                EntityModels.Carton cartonEntityModel = warehouseContext.Cartons.Find(cartonId);
+                warehouseContext.Cartons.Remove(cartonEntityModel);
+                warehouseContext.SaveChanges();
             }
         }
     }

@@ -3,10 +3,10 @@ using System.Data.Entity;
 
 namespace CartonBuilder.Data
 {
-    public partial class CartonContext : DbContext
+    public partial class WarehouseContext : DbContext
     {
-        public CartonContext()
-            : base("name=CartonContext")
+        public WarehouseContext()
+            : base("name=WarehouseContext")
         {
         }
 
