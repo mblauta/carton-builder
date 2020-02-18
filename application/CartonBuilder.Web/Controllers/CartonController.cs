@@ -1,4 +1,6 @@
-﻿using CartonBuilder.Web.ViewModels;
+﻿using CartonBuilder.Data;
+using CartonBuilder.Data.EntityModels;
+using CartonBuilder.Web.ViewModels;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace CartonBuilder.Web.Controllers
     {
         private CartonContext db = new CartonContext();
 
-        // GET: Carton
+        // GET: Cartonf
         public ActionResult Index()
         {
             var cartons = db.Cartons

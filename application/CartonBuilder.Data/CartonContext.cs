@@ -1,8 +1,8 @@
+using CartonBuilder.Data.EntityModels;
+using System.Data.Entity;
+
 namespace CartonBuilder.Data
 {
-    using EntityModels;
-    using System.Data.Entity;
-
     public partial class CartonContext : DbContext
     {
         public CartonContext()
@@ -10,10 +10,19 @@ namespace CartonBuilder.Data
         {
         }
 
+        #region Properties
+
         public virtual DbSet<Carton> Cartons { get; set; }
+
         public virtual DbSet<CartonDetail> CartonDetails { get; set; }
+
         public virtual DbSet<Equipment> Equipments { get; set; }
+
         public virtual DbSet<ModelType> ModelTypes { get; set; }
+
+        #endregion
+
+        #region Events
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,5 +41,8 @@ namespace CartonBuilder.Data
                 .WithRequired(e => e.ModelType)
                 .WillCascadeOnDelete(false);
         }
+
+        #endregion
+
     }
 }
