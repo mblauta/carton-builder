@@ -3,7 +3,7 @@ using CartonBuilder.Models;
 
 namespace CartonBuilder.Web.ViewModels
 {
-    public class CartonListEquipmentToAddViewModel
+    public class CartonListAvailableEquipmentViewModel
     {
         public Carton Carton { get; set; }
 

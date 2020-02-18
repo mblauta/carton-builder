@@ -13,6 +13,14 @@ namespace CartonBuilder.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Prettify carton command routes.
+            // Instead of 'Carton/ListAvailableEquipment/5', specify route as 'Carton/5/ListAvailableEquipment'.
+            routes.MapRoute(
+                name: "CartonCommand",
+                url: "Carton/{id}/{action}",
+                defaults: new { controller = "Carton" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

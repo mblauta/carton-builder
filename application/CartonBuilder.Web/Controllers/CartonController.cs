@@ -166,8 +166,8 @@ namespace CartonBuilder.Web.Controllers
 
         #endregion Delete
 
-        // TODO: GET: Carton/5/ListEquipmentToAdd
-        public ActionResult ListEquipmentToAdd(int? id)
+        // TODO: GET: Carton/5/ListAvailableEquipment
+        public ActionResult ListAvailableEquipment(int? id)
         {
             // Early exit if the carton ID is not provided. There's really nothing to do.
             if (id == null)
@@ -183,20 +183,17 @@ namespace CartonBuilder.Web.Controllers
                 return HttpNotFound();
             }
 
-            var cartonListEquipmentToAddViewModel = new CartonListEquipmentToAddViewModel()
+            var cartonListAvailableEquipmentViewModel = new CartonListAvailableEquipmentViewModel()
             {
                 Carton = carton,
-                EquipmentList = _equipmentService.ListEquipmentNotInCarton(carton.Id)
+                EquipmentList = _equipmentService.ListAvailableEquipmentForCarton(carton.Id)
             };
 
-            return View(cartonListEquipmentToAddViewModel);
+            return View(cartonListAvailableEquipmentViewModel);
         }
 
-
-        // ##################################################################################################
-        // ##################################################################################################
-
-        public ActionResult AddEquipmentToCarton([Bind(Include = "CartonId,EquipmentId")] AddEquipmentViewModel addEquipmentViewModel)
+        // TODO: GET: Carton/5/AddEquipment
+        public ActionResult AddEquipmentToCarton([Bind(Include = "CartonId, EquipmentId")] AddEquipmentViewModel addEquipmentViewModel)
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //if (ModelState.IsValid)
@@ -226,6 +223,10 @@ namespace CartonBuilder.Web.Controllers
             //}
             //return RedirectToAction("AddEquipment", new { id = addEquipmentViewModel.CartonId });
         }
+
+        // ##################################################################################################
+        // ##################################################################################################
+
 
         public ActionResult ViewCartonEquipment(int? id)
         {

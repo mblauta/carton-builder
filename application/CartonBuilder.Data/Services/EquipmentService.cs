@@ -7,11 +7,10 @@ namespace CartonBuilder.Data.Services
     public class EquipmentService
     {
         /// <summary>
-        /// Lists all the equipment currently in the data store that HAVE NOT been added
-        /// to the carton yet.
+        /// Lists all the equipment currently in the data store that can be added to the carton.
         /// </summary>
         /// <returns>Returns a list of equipment.</returns>
-        public List<Equipment> ListEquipmentNotInCarton(int cartonId)
+        public List<Equipment> ListAvailableEquipmentForCarton(int cartonId)
         {
             using (var warehouseContext = new WarehouseContext())
             {

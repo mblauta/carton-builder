@@ -165,14 +165,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CartonListEquipmentToAddViewModel.cs" />
+    <Compile Include="ViewModels\CartonListAvailableEquipmentViewModel.cs" />
     <Compile Include="ViewModels\CartonCreateViewModel.cs" />
     <Compile Include="ViewModels\CartonDeleteViewModel.cs" />
     <Compile Include="ViewModels\CartonDetailsViewModel.cs" />
     <Compile Include="ViewModels\CartonEditViewModel.cs" />
     <Compile Include="ViewModels\CartonIndexViewModel.cs" />
     <Compile Include="ViewModels\RemoveEquipmentViewModel.cs" />
-    <Compile Include="ViewModels\AddEquipmentViewModel.cs" />
+    <Compile Include="ViewModels\CartonAddEquipmentToCartonViewModel.cs" />
     <Compile Include="ViewModels\CartonViewModel.cs" />
     <Compile Include="ViewModels\EquipmentViewModel.cs" />
   </ItemGroup>
@@ -225,7 +225,7 @@
     <Content Include="Views\Carton\Delete.cshtml" />
     <Content Include="Views\Carton\Details.cshtml" />
     <Content Include="Views\Carton\Edit.cshtml" />
-    <Content Include="Views\Carton\ListEquipmentToAdd.cshtml" />
+    <Content Include="Views\Carton\ListAvailableEquipment.cshtml" />
     <Content Include="Views\Carton\ViewCartonEquipment.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
