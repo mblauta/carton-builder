@@ -126,21 +126,31 @@ namespace CartonBuilder.Web.Controllers
 
         #endregion Edit
 
+        #region Delete
+
         // GET: Carton/Delete/5
         public ActionResult Delete(int? id)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            // Early exit if the carton ID is not provided. There's really nothing to do.
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Data.EntityModels.Carton carton = db.Cartons.Find(id);
-            //if (carton == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(carton);
+            // Retrieve carton for the given ID...
+            var cartonDeleteViewModel = new CartonDeleteViewModel()
+            {
+                Carton = _cartonService.GetCarton(id.Value)
+            };
+
+            // Return HTTP 404 if we get NULL from the service (i.e., no records found
+            // matching the given ID).
+            if (cartonDeleteViewModel.Carton == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(cartonDeleteViewModel);
         }
 
         // POST: Carton/Delete/5
@@ -148,11 +158,11 @@ namespace CartonBuilder.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Data.EntityModels.Carton carton = db.Cartons.Find(id);
-            db.Cartons.Remove(carton);
-            db.SaveChanges();
+            _cartonService.RemoveCarton(id);
             return RedirectToAction("Index");
         }
+
+        #endregion Delete
 
         protected override void Dispose(bool disposing)
         {

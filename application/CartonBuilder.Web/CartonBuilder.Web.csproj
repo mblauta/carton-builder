@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CartonCreateViewModel.cs" />
+    <Compile Include="ViewModels\CartonDeleteViewModel.cs" />
     <Compile Include="ViewModels\CartonDetailsViewModel.cs" />
     <Compile Include="ViewModels\CartonEditViewModel.cs" />
     <Compile Include="ViewModels\CartonIndexViewModel.cs" />

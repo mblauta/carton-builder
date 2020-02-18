@@ -8,7 +8,7 @@ namespace CartonBuilder.Data.Services
     public class CartonService
     {
         /// <summary>
-        /// Lists all the cartons currently in the database.
+        /// Lists all the cartons currently in the data store.
         /// </summary>
         /// <returns>Returns a list of cartons.</returns>
         public List<Carton> ListCartons()
@@ -32,7 +32,7 @@ namespace CartonBuilder.Data.Services
         /// <param name="cartonId">ID of carton to look for.</param>
         /// <returns>
         /// Returns a carton that matches the given ID. If the ID is not found
-        /// in the database, NULL is returned.
+        /// in the data store, NULL is returned.
         /// </returns>
         public Carton GetCarton(int cartonId)
         {
@@ -51,9 +51,9 @@ namespace CartonBuilder.Data.Services
         }
 
         /// <summary>
-        /// Adds a new carton to the database.
+        /// Adds a new carton to the data store.
         /// </summary>
-        /// <param name="carton">The carton to be added to the database.</param>
+        /// <param name="carton">The carton to be added to the data store.</param>
         /// <returns>Returns the ID of the newly added carton.</returns>
         public int AddCarton(Carton carton)
         {
@@ -98,6 +98,20 @@ namespace CartonBuilder.Data.Services
             {
                 EntityModels.Carton cartonEntityModel = cartonContext.Cartons.Find(carton.Id);
                 cartonEntityModel.CartonNumber = carton.CartonNumber;
+                cartonContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Removes a carton matching the ID provided from the data store.
+        /// </summary>
+        /// <param name="cartonId">ID of carton to remove.</param>
+        public void RemoveCarton(int cartonId)
+        {
+            using (var cartonContext = new CartonContext())
+            {
+                EntityModels.Carton cartonEntityModel = cartonContext.Cartons.Find(cartonId);
+                cartonContext.Cartons.Remove(cartonEntityModel);
                 cartonContext.SaveChanges();
             }
         }
