@@ -1,6 +1,7 @@
 ﻿using CartonBuilder.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace CartonBuilder.Data.Services
 {
@@ -46,6 +47,34 @@ namespace CartonBuilder.Data.Services
                                     })
                                     .SingleOrDefault();
                 return carton;
+            }
+        }
+
+        /// <summary>
+        /// Adds a new carton to the database.
+        /// </summary>
+        /// <param name="carton">The carton to be added to the database.</param>
+        /// <returns>Returns the ID of the newly added carton.</returns>
+        public int AddCarton(Carton carton)
+        {
+            // Throw exception if no carton was provided.
+            if (carton == null)
+            {
+                throw new ArgumentNullException("carton", "Carton is required but was not provided.");
+            }
+
+            using (var cartonContext = new CartonContext())
+            {
+                var cartonEntityModel = new EntityModels.Carton()
+                {
+                    Id = carton.Id,
+                    CartonNumber = carton.CartonNumber
+                };
+
+                var newCarton = cartonContext.Cartons.Add(cartonEntityModel);
+                cartonContext.SaveChanges();
+
+                return newCarton.Id;
             }
         }
     }

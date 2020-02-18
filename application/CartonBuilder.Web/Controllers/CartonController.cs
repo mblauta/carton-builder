@@ -55,6 +55,8 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonDetailsViewModel);
         }
 
+        #region Create
+
         // GET: Carton/Create
         public ActionResult Create()
         {
@@ -66,19 +68,18 @@ namespace CartonBuilder.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CartonNumber")] Data.EntityModels.Carton carton)
+        public ActionResult Create([Bind(Include = "Id,CartonNumber")] Carton carton)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (ModelState.IsValid)
+            {
+                _cartonService.AddCarton(carton);
+                return RedirectToAction("Index");
+            }
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.Cartons.Add(carton);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //return View(carton);
+            return View(carton);
         }
+
+        #endregion Create
 
         // GET: Carton/Edit/5
         public ActionResult Edit(int? id)

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CartonBuilder.Models")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Library containing domain models used by the Carton Builder application.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CartonBuilder.Models")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Cartons 'R Us")]
+[assembly: AssemblyProduct("Carton Builder")]
+[assembly: AssemblyCopyright("Copyright © Cartons 'R Us, LLC 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
