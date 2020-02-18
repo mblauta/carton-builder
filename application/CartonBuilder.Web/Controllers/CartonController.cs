@@ -15,6 +15,7 @@ namespace CartonBuilder.Web.Controllers
     public class CartonController : Controller
     {
         private DataServices.CartonService _cartonService = new DataServices.CartonService();
+        private DataServices.EquipmentService _equipmentService = new DataServices.EquipmentService();
 
         // GET: Carton
         public ActionResult Index()
@@ -165,6 +166,33 @@ namespace CartonBuilder.Web.Controllers
 
         #endregion Delete
 
+        // TODO: GET: Carton/5/ListEquipmentToAdd
+        public ActionResult ListEquipmentToAdd(int? id)
+        {
+            // Early exit if the carton ID is not provided. There's really nothing to do.
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Retrieve the carton with the ID provided. This also ensures that we have a
+            // valid carton to add equipment to.
+            var carton = _cartonService.GetCarton(id.Value);
+            if (carton == null)
+            {
+                return HttpNotFound();
+            }
+
+            var cartonListEquipmentToAddViewModel = new CartonListEquipmentToAddViewModel()
+            {
+                Carton = carton,
+                EquipmentList = _equipmentService.ListEquipmentNotInCarton(carton.Id)
+            };
+
+            return View(cartonListEquipmentToAddViewModel);
+        }
+
+
         // ##################################################################################################
         // ##################################################################################################
 
@@ -179,41 +207,6 @@ namespace CartonBuilder.Web.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AddEquipment(int? id)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-
-            //var carton = db.Cartons
-            //    .Where(c => c.Id == id)
-            //    .Select(c => new CartonDetailsViewModelOld()
-            //    {
-            //        CartonNumber = c.CartonNumber,
-            //        CartonId = c.Id
-            //    })
-            //    .SingleOrDefault();
-
-            //if (carton == null)
-            //{
-            //    return HttpNotFound();
-            //}
-
-            //var equipment = db.Equipments
-            //    .Where(e => !db.CartonDetails.Where(cd => cd.CartonId == id).Select(cd => cd.EquipmentId).Contains(e.Id) )
-            //    .Select(e => new EquipmentViewModel()
-            //    {
-            //        Id = e.Id,
-            //        ModelType = e.ModelType.TypeName,
-            //        SerialNumber = e.SerialNumber
-            //    })
-            //    .ToList();
-
-            //carton.Equipment = equipment;
-            //return View(carton);
-        }
 
         public ActionResult AddEquipmentToCarton([Bind(Include = "CartonId,EquipmentId")] AddEquipmentViewModel addEquipmentViewModel)
         {

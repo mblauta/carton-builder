@@ -1,0 +1,36 @@
+﻿@model CartonBuilder.Web.ViewModels.CartonListEquipmentToAddViewModel
+
+@{
+    ViewBag.Title = "AddEquipment";
+}
+
+<h2>AddEquipment</h2>
+
+<h3>@Html.DisplayFor(model => model.Carton.CartonNumber)</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().ModelType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().SerialNumber)
+        </th>    
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.EquipmentList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Add", "AddEquipmentToCarton", new { cartonId = Model.Carton.Id, equipmentId = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
