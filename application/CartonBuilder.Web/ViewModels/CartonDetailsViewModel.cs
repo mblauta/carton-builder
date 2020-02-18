@@ -2,8 +2,7 @@
 
 namespace CartonBuilder.Web.ViewModels
 {
-    public class CartonDetailsViewModel
+    public class CartonDetailsViewModel : Carton
     {
-        public Carton Carton { get; set; }
     }
 }

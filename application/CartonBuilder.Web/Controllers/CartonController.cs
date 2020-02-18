@@ -16,8 +16,6 @@ namespace CartonBuilder.Web.Controllers
     {
         private DataServices.CartonService _cartonService = new DataServices.CartonService();
 
-        private CartonContext db = new CartonContext();
-
         // GET: Carton
         public ActionResult Index()
         {
@@ -40,17 +38,20 @@ namespace CartonBuilder.Web.Controllers
             }
 
             // Retrieve carton for the given ID...
-            var cartonDetailsViewModel = new CartonDetailsViewModel()
-            {
-                Carton = _cartonService.GetCarton(id.Value)
-            };
+            Carton carton = _cartonService.GetCarton(id.Value);
 
             // Return HTTP 404 if we get NULL from the service (i.e., no records found
             // matching the given ID).
-            if (cartonDetailsViewModel.Carton == null)
+            if (carton == null)
             {
                 return HttpNotFound();
             }
+
+            var cartonDetailsViewModel = new CartonDetailsViewModel()
+            {
+                Id = carton.Id,
+                CartonNumber = carton.CartonNumber
+            };
 
             return View(cartonDetailsViewModel);
         }
@@ -163,6 +164,11 @@ namespace CartonBuilder.Web.Controllers
         }
 
         #endregion Delete
+
+        // ##################################################################################################
+        // ##################################################################################################
+
+        private CartonContext db = new CartonContext();
 
         protected override void Dispose(bool disposing)
         {
