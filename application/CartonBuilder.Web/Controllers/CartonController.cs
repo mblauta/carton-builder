@@ -25,16 +25,10 @@ namespace CartonBuilder.Web.Controllers
         }
 
         // GET: Carton/5/Details
-        public ActionResult Details(int? cartonIid)
+        public ActionResult Details(int cartonId)
         {
-            if (id == null)
-            {
-                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
-                return HttpBadRequest("Carton ID");
-            }
-
             // Retrieve carton for the given ID...
-            Carton carton = _cartonService.GetCarton(id.Value);
+            Carton carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
                 // Return HTTP 404 since no record found matching the given ID.
@@ -77,17 +71,11 @@ namespace CartonBuilder.Web.Controllers
 
         #region Edit
 
-        // GET: Carton/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Carton/5/Edit
+        public ActionResult Edit(int cartonId)
         {
-            if (id == null)
-            {
-                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
-                return HttpBadRequest("Carton ID");
-            }
-
             // Retrieve the carton for the given ID...
-            Carton carton = _cartonService.GetCarton(id.Value);
+            Carton carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
                 // Return HTTP 404 since no record found matching the given ID.
@@ -102,7 +90,7 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonEditViewModel);
         }
 
-        // POST: Carton/Edit/5
+        // POST: Carton/5/Edit
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,17 +110,11 @@ namespace CartonBuilder.Web.Controllers
 
         #region Delete
 
-        // GET: Carton/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Carton/5/Delete
+        public ActionResult Delete(int cartonId)
         {
-            if (id == null)
-            {
-                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
-                return HttpBadRequest("Carton ID");
-            }
-
             // Retrieve the carton for the given ID...
-            Carton carton = _cartonService.GetCarton(id.Value);
+            Carton carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
                 // Return HTTP 404 since no record found matching the given ID.
@@ -146,12 +128,12 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonDeleteViewModel);
         }
 
-        // POST: Carton/Delete/5
+        // POST: Carton/5/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int cartonId)
         {
-            _cartonService.RemoveCarton(id);
+            _cartonService.RemoveCarton(cartonId);
             return RedirectToAction("Index");
         }
 
