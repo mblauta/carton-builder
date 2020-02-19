@@ -46,10 +46,9 @@ namespace CartonBuilder.Data.Services
             using (var warehouseContext = new WarehouseContext())
             {
                 // Retrieve IDs of all equipment already in the carton...
-                IQueryable<int> equipmentIdsInCarton = warehouseContext.CartonDetails
-                                                          .Where(cd => cd.CartonId == cartonId)
-                                                          .Select(cd => cd.EquipmentId);
+                IQueryable<int> equipmentIdsInCarton = GetEquipmentIdsInCartonQuery(warehouseContext, cartonId);
 
+                // Retrieve list of equipment that can be added to the carton...
                 List<Equipment> equipmentList = (from e in warehouseContext.Equipments
                                                  join mt in warehouseContext.ModelTypes on e.ModelTypeId equals mt.Id into tmp
                                                  from mt in tmp.DefaultIfEmpty()
@@ -65,7 +64,6 @@ namespace CartonBuilder.Data.Services
                                                      }
                                                  })
                                                 .ToList();
-
                 return equipmentList;
             }
         }
@@ -79,10 +77,9 @@ namespace CartonBuilder.Data.Services
             using (var warehouseContext = new WarehouseContext())
             {
                 // Retrieve IDs of all equipment already in the carton...
-                IQueryable<int> equipmentIdsInCarton = warehouseContext.CartonDetails
-                                                          .Where(cd => cd.CartonId == cartonId)
-                                                          .Select(cd => cd.EquipmentId);
+                IQueryable<int> equipmentIdsInCarton = GetEquipmentIdsInCartonQuery(warehouseContext, cartonId);
 
+                // Retrieve list of equipment added to the carton...
                 List<Equipment> equipmentList = (from e in warehouseContext.Equipments
                                                  join mt in warehouseContext.ModelTypes on e.ModelTypeId equals mt.Id into tmp
                                                  from mt in tmp.DefaultIfEmpty()
@@ -98,9 +95,20 @@ namespace CartonBuilder.Data.Services
                                                      }
                                                  })
                                                 .ToList();
-
                 return equipmentList;
             }
         }
+
+        #region Helper Methods
+
+        private IQueryable<int> GetEquipmentIdsInCartonQuery(WarehouseContext warehouseContext, int cartonId)
+        {
+            // Retrieve IDs of all equipment already in the carton...
+            return warehouseContext.CartonDetails
+                    .Where(cd => cd.CartonId == cartonId)
+                    .Select(cd => cd.EquipmentId);
+        }
+
+        #endregion
     }
 }

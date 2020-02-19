@@ -1,7 +1,7 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CartonBuilder.Data.EntityModels
 {
-    using System.ComponentModel.DataAnnotations.Schema;
-
     [Table("CartonDetail")]
     public partial class CartonDetail
     {

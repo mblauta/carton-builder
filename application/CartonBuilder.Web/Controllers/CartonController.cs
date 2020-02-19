@@ -1,10 +1,5 @@
-﻿using CartonBuilder.Data;
-using CartonBuilder.Models;
+﻿using CartonBuilder.Models;
 using CartonBuilder.Web.ViewModels;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -26,26 +21,23 @@ namespace CartonBuilder.Web.Controllers
             {
                 Cartons = _cartonService.ListCartons()
             };
-
             return View(cartonIndexViewModel);
         }
 
         // GET: Carton/Details/5
         public ActionResult Details(int? id)
         {
-            // Early exit if the carton ID is not provided. There's really nothing to do.
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
+                return HttpBadRequest("Carton ID");
             }
 
             // Retrieve carton for the given ID...
             Carton carton = _cartonService.GetCarton(id.Value);
-
-            // Return HTTP 404 if we get NULL from the service (i.e., no records found
-            // matching the given ID).
             if (carton == null)
             {
+                // Return HTTP 404 since no record found matching the given ID.
                 return HttpNotFound();
             }
 
@@ -54,7 +46,6 @@ namespace CartonBuilder.Web.Controllers
                 Id = carton.Id,
                 CartonNumber = carton.CartonNumber
             };
-
             return View(cartonDetailsViewModel);
         }
 
@@ -89,16 +80,17 @@ namespace CartonBuilder.Web.Controllers
         // GET: Carton/Edit/5
         public ActionResult Edit(int? id)
         {
-            // Early exit if the carton ID is not provided. There's really nothing to do.
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
+                return HttpBadRequest("Carton ID");
             }
 
             // Retrieve the carton for the given ID...
-            var carton = _cartonService.GetCarton(id.Value);
+            Carton carton = _cartonService.GetCarton(id.Value);
             if (carton == null)
             {
+                // Return HTTP 404 since no record found matching the given ID.
                 return HttpNotFound();
             }
 
@@ -107,7 +99,6 @@ namespace CartonBuilder.Web.Controllers
                 Id = carton.Id,
                 CartonNumber = carton.CartonNumber
             };
-
             return View(cartonEditViewModel);
         }
 
@@ -134,25 +125,24 @@ namespace CartonBuilder.Web.Controllers
         // GET: Carton/Delete/5
         public ActionResult Delete(int? id)
         {
-            // Early exit if the carton ID is not provided. There's really nothing to do.
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Return HTTP 400 since the carton ID was not provided. Nothing else we can do here.
+                return HttpBadRequest("Carton ID");
             }
 
-            // Retrieve carton for the given ID...
-            var cartonDeleteViewModel = new CartonDeleteViewModel()
+            // Retrieve the carton for the given ID...
+            Carton carton = _cartonService.GetCarton(id.Value);
+            if (carton == null)
             {
-                Carton = _cartonService.GetCarton(id.Value)
-            };
-
-            // Return HTTP 404 if we get NULL from the service (i.e., no records found
-            // matching the given ID).
-            if (cartonDeleteViewModel.Carton == null)
-            {
+                // Return HTTP 404 since no record found matching the given ID.
                 return HttpNotFound();
             }
 
+            var cartonDeleteViewModel = new CartonDeleteViewModel()
+            {
+                Carton = carton
+            };
             return View(cartonDeleteViewModel);
         }
 
@@ -170,11 +160,12 @@ namespace CartonBuilder.Web.Controllers
         // GET: Carton/5/ListAvailableEquipment
         public ActionResult ListAvailableEquipment(int cartonId)
         {
-            // Retrieve the carton with the ID provided. This also ensures that we have a
-            // valid carton to add equipment to.
+            // Retrieve the carton with the ID provided. This also ensures that we have a valid carton to add 
+            // equipment to.
             var carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
+                // Return HTTP 404 since no record found matching the given ID.
                 return HttpNotFound();
             }
 
@@ -183,27 +174,28 @@ namespace CartonBuilder.Web.Controllers
                 Carton = carton,
                 EquipmentList = _equipmentService.ListAvailableEquipmentForCarton(carton.Id)
             };
-
             return View(cartonListAvailableEquipmentViewModel);
         }
 
         // GET: Carton/5/AddEquipment/9
         public ActionResult AddEquipment(int cartonId, int equipmentId)
         {
-            // Retrieve the carton with the ID provided. This also ensures that we have a
-            // valid carton to add equipment to.
+            // Retrieve the carton with the ID provided. This also ensures that we have a valid carton to add 
+            // equipment to.
             var carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
-                return HttpNotFound();
+                // Return HTTP 400 since no carton found matching the given ID.
+                return HttpBadRequest("Carton ID", cartonId);
             }
 
-            // Retrieve the equipment with the ID provided. This also ensures that we are
-            // adding a valid equipment to the carton.
+            // Retrieve the equipment with the ID provided. This also ensures that we are adding a valid equipment
+            // to the carton.
             var equipment = _equipmentService.GetEquipment(equipmentId);
             if (equipment == null)
             {
-                return HttpNotFound();
+                // Return HTTP 400 since no equipment found matching the given ID.
+                return HttpBadRequest("Equipment ID", equipmentId);
             }
 
             // Add equipment to carton...
@@ -214,12 +206,13 @@ namespace CartonBuilder.Web.Controllers
         // GET: Carton/5/ListAddedEquipment
         public ActionResult ListAddedEquipment(int cartonId)
         {
-            // Retrieve the carton with the ID provided. This also ensures that we have a
-            // valid carton to add equipment to.
+            // Retrieve the carton with the ID provided. This also ensures that we have a valid carton to add 
+            // equipment to.
             var carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
-                return HttpNotFound();
+                // Return HTTP 400 since no carton found matching the given ID.
+                return HttpBadRequest("Carton ID", cartonId);
             }
 
             var cartonListAddedEquipmentViewModel = new CartonListAddedEquipmentViewModel()
@@ -232,25 +225,43 @@ namespace CartonBuilder.Web.Controllers
 
         public ActionResult RemoveEquipment(int cartonId, int equipmentId)
         {
-            // Retrieve the carton with the ID provided. This also ensures that we have a
-            // valid carton to add equipment to.
+            // Retrieve the carton with the ID provided. This also ensures that we have a valid carton to add 
+            // equipment to.
             var carton = _cartonService.GetCarton(cartonId);
             if (carton == null)
             {
-                return HttpNotFound();
+                // Return HTTP 400 since no carton found matching the given ID.
+                return HttpBadRequest("Carton ID", cartonId);
             }
 
-            // Retrieve the equipment with the ID provided. This also ensures that we are
-            // adding a valid equipment to the carton.
+            // Retrieve the equipment with the ID provided. This also ensures that we are adding a valid equipment
+            // to the carton.
             var equipment = _equipmentService.GetEquipment(equipmentId);
             if (equipment == null)
             {
-                return HttpNotFound();
+                // Return HTTP 400 since no equipment found matching the given ID.
+                return HttpBadRequest("Equipment ID", equipmentId);
             }
 
             // Add equipment to carton...
             _cartonDetailService.RemoveEquipmentFromCarton(cartonId, equipmentId);
             return RedirectToRoute("CartonOperation", new { cartonId = cartonId, action = "ListAddedEquipment" });
         }
+
+        #region Helper Methods
+
+        private HttpStatusCodeResult HttpBadRequest(string paramName)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, 
+                                            string.Format("{0} is required but was not provided.", paramName));
+        }
+
+        private HttpStatusCodeResult HttpBadRequest(string paramName, int paramValue)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest,
+                                            string.Format("The {0} [{1}] does not exist in the database.", paramName, paramValue));
+        }
+
+        #endregion
     }
 }

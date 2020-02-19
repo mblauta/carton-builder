@@ -172,10 +172,6 @@
     <Compile Include="ViewModels\CartonDetailsViewModel.cs" />
     <Compile Include="ViewModels\CartonEditViewModel.cs" />
     <Compile Include="ViewModels\CartonIndexViewModel.cs" />
-    <Compile Include="ViewModels\RemoveEquipmentViewModel.cs" />
-    <Compile Include="ViewModels\CartonAddEquipmentToCartonViewModel.cs" />
-    <Compile Include="ViewModels\CartonViewModel.cs" />
-    <Compile Include="ViewModels\EquipmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

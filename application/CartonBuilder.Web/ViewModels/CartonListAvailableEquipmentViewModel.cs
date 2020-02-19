@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CartonBuilder.Models;
+﻿using CartonBuilder.Models;
+using System.Collections.Generic;
 
 namespace CartonBuilder.Web.ViewModels
 {

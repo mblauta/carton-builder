@@ -1,6 +1,5 @@
 ﻿using CartonBuilder.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CartonBuilder.Data.Services
@@ -50,7 +49,7 @@ namespace CartonBuilder.Data.Services
             {
                 // Retrieve the carton detail having the carton and equipment provided...
                 EntityModels.CartonDetail cartonDetailEntityModel = warehouseContext.CartonDetails
-                                                                       .Where(cd => cd.CartonId == cartonDetail.CartonId 
+                                                                       .Where(cd => cd.CartonId == cartonDetail.CartonId
                                                                                  && cd.EquipmentId == cartonDetail.EquipmentId)
                                                                        .FirstOrDefault();
 
