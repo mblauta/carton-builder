@@ -14,7 +14,8 @@ namespace CartonBuilder.Web
             routes.MapRoute(
                 name: "CartonOperationWithEquipment",
                 url: "Carton/{cartonId}/{action}/{equipmentId}",
-                defaults: new { controller = "Carton" }
+                defaults: new { controller = "Carton" },
+                constraints: new { cartonId = @"\d+", equipmentId = @"\d+" }
             );
 
             // Prettify carton command routes.
@@ -22,7 +23,8 @@ namespace CartonBuilder.Web
             routes.MapRoute(
                 name: "CartonOperation",
                 url: "Carton/{cartonId}/{action}",
-                defaults: new { controller = "Carton" }
+                defaults: new { controller = "Carton" },
+                constraints: new { cartonId = @"\d+" }
             );
 
             // Default route...

@@ -1,19 +1,20 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonCreateViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add Carton";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Carton</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.LabelFor(model => model.CartonNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

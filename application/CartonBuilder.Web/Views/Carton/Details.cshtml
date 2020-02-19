@@ -1,14 +1,15 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Carton Information";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
     <h4>Carton</h4>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.CartonNumber)
@@ -21,6 +22,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.RouteLink("Edit", "CartonOperation", new { cartonId = Model.Id, action = "Edit" }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

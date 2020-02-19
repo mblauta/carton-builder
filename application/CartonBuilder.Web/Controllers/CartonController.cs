@@ -24,8 +24,8 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonIndexViewModel);
         }
 
-        // GET: Carton/Details/5
-        public ActionResult Details(int? id)
+        // GET: Carton/5/Details
+        public ActionResult Details(int? cartonIid)
         {
             if (id == null)
             {

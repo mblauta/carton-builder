@@ -1,14 +1,15 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add New Carton", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -24,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.CartonNumber)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.RouteLink("Edit", "CartonOperation", new { cartonId = item.Id, action = "Edit" }) |
+                @Html.RouteLink("Details", "CartonOperation", new { cartonId = item.Id, action = "Details" }) |
+                @Html.RouteLink("Delete", "CartonOperation", new { cartonId = item.Id, action = "Delete" }) |
                 @Html.RouteLink("View Available Equipment", "CartonOperation", new { cartonId = item.Id, action = "ListAvailableEquipment" }) |
                 @Html.RouteLink("View Added Equipment", "CartonOperation", new { cartonId = item.Id, action = "ListAddedEquipment" })
             </td>
