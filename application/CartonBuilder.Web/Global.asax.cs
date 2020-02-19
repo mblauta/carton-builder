@@ -18,8 +18,6 @@ namespace CartonBuilder.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            AppDomain.CurrentDomain.SetData("DataDirectory", @"C:\01-dev\mblauta\carton-builder\database\");
         }
     }
 }
