@@ -1,7 +1,7 @@
-﻿@model CartonBuilder.Web.ViewModels.CartonListAvailableEquipmentViewModel
+﻿@model CartonBuilder.Web.ViewModels.CartonListAddedEquipmentViewModel
 
 @{
-    ViewBag.Title = "Add Equipment";
+    ViewBag.Title = "View Carton Equipment";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,7 +15,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().SerialNumber)
-        </th>    
+        </th>
         <th></th>
     </tr>
 
@@ -29,9 +29,10 @@
                 @Html.DisplayFor(modelItem => item.SerialNumber)
             </td>
             <td>
-                @Html.RouteLink("Add To Carton", "CartonOperationWithEquipment", new { cartonId = Model.Carton.Id, equipmentId = item.Id, action = "AddEquipment" })
+                @Html.RouteLink("Remove From Carton", "CartonOperationWithEquipment", new { cartonId = Model.Carton.Id, equipmentId = item.Id, action = "RemoveEquipment" })
             </td>
         </tr>
     }
 
 </table>
+

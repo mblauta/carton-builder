@@ -70,6 +70,40 @@ namespace CartonBuilder.Data.Services
             }
         }
 
+        /// <summary>
+        /// Lists all the equipment added to the carton specified.
+        /// </summary>
+        /// <returns>Returns a list of equipment.</returns>
+        public List<Equipment> ListAddedEquipmentForCarton(int cartonId)
+        {
+            using (var warehouseContext = new WarehouseContext())
+            {
+                // Retrieve IDs of all equipment already in the carton...
+                IQueryable<int> equipmentIdsInCarton = warehouseContext.CartonDetails
+                                                          .Where(cd => cd.CartonId == cartonId)
+                                                          .Select(cd => cd.EquipmentId);
+
+                List<Equipment> equipmentList = (from e in warehouseContext.Equipments
+                                                 join mt in warehouseContext.ModelTypes on e.ModelTypeId equals mt.Id into tmp
+                                                 from mt in tmp.DefaultIfEmpty()
+                                                 where equipmentIdsInCarton.Contains(e.Id)
+                                                 select new Equipment()
+                                                 {
+                                                     Id = e.Id,
+                                                     SerialNumber = e.SerialNumber,
+                                                     ModelType = new ModelType()
+                                                     {
+                                                         Id = mt.Id,
+                                                         TypeName = mt.TypeName
+                                                     }
+                                                 })
+                                                .ToList();
+
+                return equipmentList;
+            }
+        }
+
+
         public int AddEquipmentToCarton(int cartonId, int equipmentId)
         {
             using (var warehouseContext = new WarehouseContext())
