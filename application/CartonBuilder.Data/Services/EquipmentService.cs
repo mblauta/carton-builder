@@ -102,22 +102,5 @@ namespace CartonBuilder.Data.Services
                 return equipmentList;
             }
         }
-
-
-        public int AddEquipmentToCarton(int cartonId, int equipmentId)
-        {
-            using (var warehouseContext = new WarehouseContext())
-            {
-                var cartonDetailEntityModel = new EntityModels.CartonDetail()
-                {
-                    CartonId = cartonId,
-                    EquipmentId = equipmentId
-                };
-                EntityModels.CartonDetail newCartonDetailEntityModel = warehouseContext.CartonDetails.Add(cartonDetailEntityModel);
-                warehouseContext.SaveChanges();
-
-                return newCartonDetailEntityModel.Id;
-            }
-        }
     }
 }

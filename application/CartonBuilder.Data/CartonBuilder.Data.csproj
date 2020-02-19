@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\CartonDetailService.cs" />
     <Compile Include="Services\EquipmentService.cs" />
     <Compile Include="WarehouseContext.cs" />
     <Compile Include="EntityModels\Carton.cs" />

@@ -16,6 +16,7 @@ namespace CartonBuilder.Web.Controllers
     {
         private DataServices.CartonService _cartonService = new DataServices.CartonService();
         private DataServices.EquipmentService _equipmentService = new DataServices.EquipmentService();
+        private DataServices.CartonDetailService _cartonDetailService = new DataServices.CartonDetailService();
 
         // GET: Carton
         public ActionResult Index()
@@ -206,8 +207,8 @@ namespace CartonBuilder.Web.Controllers
             }
 
             // Add equipment to carton...
-            _equipmentService.AddEquipmentToCarton(cartonId, equipmentId);
-            return RedirectToRoute("CartonCommand", new { cartonId = cartonId, action = "ListAvailableEquipment" });
+            _cartonDetailService.AddEquipmentToCarton(cartonId, equipmentId);
+            return RedirectToRoute("CartonOperation", new { cartonId = cartonId, action = "ListAvailableEquipment" });
         }
 
         // GET: Carton/5/ListAddedEquipment
@@ -229,19 +230,27 @@ namespace CartonBuilder.Web.Controllers
             return View(cartonListAddedEquipmentViewModel);
         }
 
-        // ##################################################################################################
-        // ##################################################################################################
-
-
-
-        public ActionResult RemoveEquipmentOnCarton([Bind(Include = "CartonId,EquipmentId")] RemoveEquipmentViewModel removeEquipmentViewModel)
+        public ActionResult RemoveEquipment(int cartonId, int equipmentId)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //if (ModelState.IsValid)
-            //{
-            //    //Remove code here
-            //}
-            //return RedirectToAction("ViewCartonEquipment", new { id = removeEquipmentViewModel.CartonId });
+            // Retrieve the carton with the ID provided. This also ensures that we have a
+            // valid carton to add equipment to.
+            var carton = _cartonService.GetCarton(cartonId);
+            if (carton == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Retrieve the equipment with the ID provided. This also ensures that we are
+            // adding a valid equipment to the carton.
+            var equipment = _equipmentService.GetEquipment(equipmentId);
+            if (equipment == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Add equipment to carton...
+            _cartonDetailService.RemoveEquipmentFromCarton(cartonId, equipmentId);
+            return RedirectToRoute("CartonOperation", new { cartonId = cartonId, action = "ListAddedEquipment" });
         }
     }
 }
