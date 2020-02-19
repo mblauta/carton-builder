@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Carton</h4>
+    The information for the carton selected is shown below.
     <hr />
 
     <dl class="dl-horizontal">
@@ -21,7 +21,8 @@
 
     </dl>
 </div>
-<p>
-    @Html.RouteLink("Edit", "CartonOperation", new { cartonId = Model.Id, action = "Edit" }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div style="text-align: center;">
+    <span class="glyphicon glyphicon-pencil"></span> @Html.RouteLink("Edit Information", "CartonOperation", new { cartonId = Model.Id, action = "Edit" })
+    <span style="padding-left: 15px; padding-right: 15px">|</span>
+    <span class="glyphicon glyphicon-arrow-left"></span> @Html.RouteLink("Back to List", "Default", new { action = "Index" })
+</div>

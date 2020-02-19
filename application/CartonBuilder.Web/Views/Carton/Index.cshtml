@@ -1,13 +1,13 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonIndexViewModel
 
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "Carton Inventory";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Add New Carton", "Create")
+<p style="text-align: right;">
+    <span class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Add New Carton", "Create")
 </p>
 
 <table class="table">
@@ -24,12 +24,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CartonNumber)
             </td>
-            <td>
-                @Html.RouteLink("Edit", "CartonOperation", new { cartonId = item.Id, action = "Edit" }) |
-                @Html.RouteLink("Details", "CartonOperation", new { cartonId = item.Id, action = "Details" }) |
-                @Html.RouteLink("Delete", "CartonOperation", new { cartonId = item.Id, action = "Delete" }) |
-                @Html.RouteLink("View Available Equipment", "CartonOperation", new { cartonId = item.Id, action = "ListAvailableEquipment" }) |
-                @Html.RouteLink("View Added Equipment", "CartonOperation", new { cartonId = item.Id, action = "ListAddedEquipment" })
+            <td align="right">
+                <a href="@Url.RouteUrl("CartonOperation", new { cartonId = item.Id, action = "Edit" })"
+                   title="Edit carton information"><span class="glyphicon glyphicon-pencil"></span></a>
+                &nbsp; <a href="@Url.RouteUrl("CartonOperation", new { cartonId = item.Id, action = "Details" })"
+                         title="View carton information"><span class="glyphicon glyphicon-info-sign"></span></a>
+                &nbsp; <a href="@Url.RouteUrl("CartonOperation", new { cartonId = item.Id, action = "Delete" })"
+                         title="Remove carton"><span class="glyphicon glyphicon-remove"></span></a>
+                <span style="padding-left: 5px; padding-right: 5px; font-size: 16pt; color: #ddd;">|</span>
+                <a href="@Url.RouteUrl("CartonOperation", new { cartonId = item.Id, action = "ListAvailableEquipment" })"
+                         title="Add equipment to carton"><span class="glyphicon glyphicon-log-in"></span></a>
+                &nbsp; <a href="@Url.RouteUrl("CartonOperation", new { cartonId = item.Id, action = "ListAddedEquipment" })"
+                         title="Remove equipment from carton"><span class="glyphicon glyphicon-log-out"></span></a>
             </td>
         </tr>
     }

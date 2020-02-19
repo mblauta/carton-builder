@@ -16,13 +16,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="navbar-brand">
-                    Carton Builder
+                <div>
+                    @Html.RouteLink("Carton Builder", "Default", new { action = "Index", controller = "Carton" }, new { @class = "navbar-brand" })
                 </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Carton")</li>
+                    <li>&nbsp;</li>
                 </ul>
             </div>
         </div>

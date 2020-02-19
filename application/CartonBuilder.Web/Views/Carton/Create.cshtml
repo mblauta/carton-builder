@@ -1,7 +1,7 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonCreateViewModel
 
 @{
-    ViewBag.Title = "Add Carton";
+    ViewBag.Title = "Add New Carton";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Carton</h4>
+        Provide the information of the new carton to be added.
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -26,11 +26,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                <span class="glyphicon glyphicon-arrow-left" style="padding-left: 20px;"></span> @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -6,10 +6,8 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-
 <div>
-    <h4>Carton</h4>
+    Verify the carton to be removed from inventory.
     <hr />
 
     <dl class="dl-horizontal">
@@ -25,9 +23,14 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-actions no-color" style="text-align: center;">
+            <div style="padding-bottom: 20px;">
+                <div style="color: red; font-size: 12pt; font-weight: bold;">Are you sure you want to delete this carton?</div>
+                This action cannot be undone.
+            </div>
+
+            <input type="submit" value="Delete" class="btn btn-default" />
+            <span class="glyphicon glyphicon-arrow-left" style="padding-left: 20px;"></span> @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

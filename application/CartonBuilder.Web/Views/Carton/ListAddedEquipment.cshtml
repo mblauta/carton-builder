@@ -1,38 +1,53 @@
 ﻿@model CartonBuilder.Web.ViewModels.CartonListAddedEquipmentViewModel
 
 @{
-    ViewBag.Title = "Carton Contents - View Equipment";
+    ViewBag.Title = "Remove Equipment";
+    ViewBag.CartonLabel = Html.DisplayNameFor(model => model.Carton.CartonNumber)
+                            + " "
+                            + Html.DisplayFor(model => model.Carton.CartonNumber);
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.CartonLabel &ndash; @ViewBag.Title</h2>
 
-<h3>@Html.DisplayFor(model => model.Carton.CartonNumber)</h3>
+<div>
+    <div style="padding-bottom: 10px;">
+        Select equipment to remove from the list of items below.
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().ModelType.TypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().SerialNumber)
-        </th>
-        <th></th>
-    </tr>
+    <div style="text-align: right; padding-bottom: 10px;">
+        <span class="glyphicon glyphicon-arrow-left"></span> @Html.RouteLink("Back to List", "Default", new { action = "Index" })
+    </div>
 
-    @foreach (var item in Model.EquipmentList)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelType.TypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SerialNumber)
-            </td>
-            <td>
-                @Html.RouteLink("Remove From Carton", "CartonOperationWithEquipment", new { cartonId = Model.Carton.Id, equipmentId = item.Id, action = "RemoveEquipment" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().ModelType.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentList.FirstOrDefault().SerialNumber)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.EquipmentList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelType.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td align="right" style="padding-right: 15px;">
+                    <a href="@Url.RouteUrl("CartonOperationWithEquipment", new { cartonId = Model.Carton.Id, equipmentId = item.Id, action = "RemoveEquipment" })"
+                       title="Remove equipment from carton"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+        }
+    </table>
 
+    <hr />
+    <div style="text-align: right;">
+        <span class="glyphicon glyphicon-arrow-left"></span> @Html.RouteLink("Back to List", "Default", new { action = "Index" })
+    </div>
+</div>
