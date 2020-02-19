@@ -1,25 +1,20 @@
-﻿using CartonBuilder.Models;
+﻿using CartonBuilder.Interfaces;
+using CartonBuilder.Models;
 using CartonBuilder.Web.ViewModels;
 using System.Net;
 using System.Web.Mvc;
-
-using DataServices = CartonBuilder.Data.Services;
 
 namespace CartonBuilder.Web.Controllers
 {
     public class CartonController : Controller
     {
-        //private DataServices.CartonService _cartonService = new DataServices.CartonService();
-        //private DataServices.EquipmentService _equipmentService = new DataServices.EquipmentService();
-        //private DataServices.CartonDetailService _cartonDetailService = new DataServices.CartonDetailService();
+        private readonly ICartonService _cartonService;
+        private readonly IEquipmentService _equipmentService;
+        private readonly ICartonDetailService _cartonDetailService;
 
-        private readonly DataServices.ICartonService _cartonService;
-        private readonly DataServices.IEquipmentService _equipmentService;
-        private readonly DataServices.ICartonDetailService _cartonDetailService;
-
-        public CartonController(DataServices.ICartonService cartonService,
-                                DataServices.IEquipmentService equipmentService,
-                                DataServices.ICartonDetailService cartonDetailService)
+        public CartonController(ICartonService cartonService,
+                                IEquipmentService equipmentService,
+                                ICartonDetailService cartonDetailService)
         {
             _cartonService = cartonService;
             _equipmentService = equipmentService;

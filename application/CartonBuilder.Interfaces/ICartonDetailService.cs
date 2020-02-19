@@ -1,6 +1,6 @@
 ﻿using CartonBuilder.Models;
 
-namespace CartonBuilder.Data.Services
+namespace CartonBuilder.Interfaces
 {
     public interface ICartonDetailService
     {

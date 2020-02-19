@@ -1,8 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using CartonBuilder.Web.Controllers;
-using CartonBuilder.Web.ViewModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CartonBuilder.Web.Tests.Controllers
 {

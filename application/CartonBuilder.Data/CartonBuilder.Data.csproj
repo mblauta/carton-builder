@@ -64,10 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\CartonDetailService.cs" />
-    <Compile Include="Services\IEquipmentService.cs" />
-    <Compile Include="Services\ICartonService.cs" />
     <Compile Include="Services\EquipmentService.cs" />
-    <Compile Include="Services\ICartonDetailService.cs" />
     <Compile Include="WarehouseContext.cs" />
     <Compile Include="EntityModels\Carton.cs" />
     <Compile Include="EntityModels\CartonDetail.cs" />
@@ -93,6 +90,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CartonBuilder.Interfaces\CartonBuilder.Interfaces.csproj">
+      <Project>{8f8612ee-f675-4a41-a79d-ede985ac1ad1}</Project>
+      <Name>CartonBuilder.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CartonBuilder.Models\CartonBuilder.Models.csproj">
       <Project>{18f9dc02-2322-4a39-8e95-5deabe9e71a2}</Project>
       <Name>CartonBuilder.Models</Name>

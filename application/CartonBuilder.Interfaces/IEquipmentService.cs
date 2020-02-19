@@ -1,7 +1,7 @@
 ﻿using CartonBuilder.Models;
 using System.Collections.Generic;
 
-namespace CartonBuilder.Data.Services
+namespace CartonBuilder.Interfaces
 {
     public interface IEquipmentService
     {

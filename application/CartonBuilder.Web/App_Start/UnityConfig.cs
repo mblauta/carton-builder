@@ -1,4 +1,5 @@
 using CartonBuilder.Data.Services;
+using CartonBuilder.Interfaces;
 using System;
 using Unity;
 
@@ -10,6 +11,8 @@ namespace CartonBuilder.Web
     public static class UnityConfig
     {
         #region Unity Container
+
+#pragma warning disable IDE0044 // Add readonly modifier
         private static Lazy<IUnityContainer> container =
           new Lazy<IUnityContainer>(() =>
           {
@@ -17,6 +20,7 @@ namespace CartonBuilder.Web
               RegisterTypes(container);
               return container;
           });
+#pragma warning restore IDE0044 // Add readonly modifier
 
         /// <summary>
         /// Configured Unity Container.
