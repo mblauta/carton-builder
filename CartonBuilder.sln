@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartonBuilder.Data", "appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartonBuilder.Models", "application\CartonBuilder.Models\CartonBuilder.Models.csproj", "{18F9DC02-2322-4A39-8E95-5DEABE9E71A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartonBuilder.Web.Tests", "application\CartonBuilder.Web.Tests\CartonBuilder.Web.Tests.csproj", "{3EFEDB71-C52F-4086-8665-136FBB2720F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{18F9DC02-2322-4A39-8E95-5DEABE9E71A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F9DC02-2322-4A39-8E95-5DEABE9E71A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18F9DC02-2322-4A39-8E95-5DEABE9E71A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFEDB71-C52F-4086-8665-136FBB2720F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFEDB71-C52F-4086-8665-136FBB2720F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFEDB71-C52F-4086-8665-136FBB2720F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFEDB71-C52F-4086-8665-136FBB2720F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
