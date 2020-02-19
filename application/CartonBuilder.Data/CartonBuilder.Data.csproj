@@ -64,7 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\CartonDetailService.cs" />
+    <Compile Include="Services\IEquipmentService.cs" />
+    <Compile Include="Services\ICartonService.cs" />
     <Compile Include="Services\EquipmentService.cs" />
+    <Compile Include="Services\ICartonDetailService.cs" />
     <Compile Include="WarehouseContext.cs" />
     <Compile Include="EntityModels\Carton.cs" />
     <Compile Include="EntityModels\CartonDetail.cs" />

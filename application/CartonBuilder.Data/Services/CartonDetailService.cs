@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CartonBuilder.Data.Services
 {
-    public class CartonDetailService
+    public class CartonDetailService : ICartonDetailService
     {
         /// <summary>
         /// Adds a new Carton Detail to the data store.

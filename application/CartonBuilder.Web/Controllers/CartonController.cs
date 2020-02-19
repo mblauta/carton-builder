@@ -9,10 +9,23 @@ namespace CartonBuilder.Web.Controllers
 {
     public class CartonController : Controller
     {
-        private DataServices.CartonService _cartonService = new DataServices.CartonService();
-        private DataServices.EquipmentService _equipmentService = new DataServices.EquipmentService();
-        private DataServices.CartonDetailService _cartonDetailService = new DataServices.CartonDetailService();
+        //private DataServices.CartonService _cartonService = new DataServices.CartonService();
+        //private DataServices.EquipmentService _equipmentService = new DataServices.EquipmentService();
+        //private DataServices.CartonDetailService _cartonDetailService = new DataServices.CartonDetailService();
 
+        private readonly DataServices.ICartonService _cartonService;
+        private readonly DataServices.IEquipmentService _equipmentService;
+        private readonly DataServices.ICartonDetailService _cartonDetailService;
+
+        public CartonController(DataServices.ICartonService cartonService,
+                                DataServices.IEquipmentService equipmentService,
+                                DataServices.ICartonDetailService cartonDetailService)
+        {
+            _cartonService = cartonService;
+            _equipmentService = equipmentService;
+            _cartonDetailService = cartonDetailService;
+        }
+        
         // GET: Carton
         public ActionResult Index()
         {
@@ -182,7 +195,7 @@ namespace CartonBuilder.Web.Controllers
 
             // Add equipment to carton...
             _cartonDetailService.AddEquipmentToCarton(cartonId, equipmentId);
-            return RedirectToRoute("CartonOperation", new { cartonId = cartonId, action = "ListAvailableEquipment" });
+            return RedirectToRoute("CartonOperation", new { cartonId, action = "ListAvailableEquipment" });
         }
 
         // GET: Carton/5/ListAddedEquipment
@@ -227,16 +240,10 @@ namespace CartonBuilder.Web.Controllers
 
             // Add equipment to carton...
             _cartonDetailService.RemoveEquipmentFromCarton(cartonId, equipmentId);
-            return RedirectToRoute("CartonOperation", new { cartonId = cartonId, action = "ListAddedEquipment" });
+            return RedirectToRoute("CartonOperation", new { cartonId, action = "ListAddedEquipment" });
         }
 
         #region Helper Methods
-
-        private HttpStatusCodeResult HttpBadRequest(string paramName)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, 
-                                            string.Format("{0} is required but was not provided.", paramName));
-        }
 
         private HttpStatusCodeResult HttpBadRequest(string paramName, int paramValue)
         {

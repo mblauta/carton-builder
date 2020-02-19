@@ -9,125 +9,125 @@ namespace CartonBuilder.Web.Tests.Controllers
     [TestClass]
     public class CartonControllerTest
     {
-        private readonly int _cartonId = 1;
-        private readonly int _equipmentId = 1;
+        //private readonly int _cartonId = 1;
+        //private readonly int _equipmentId = 1;
 
-        [TestMethod]
-        public void Index_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void Index_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.Index() as ViewResult;
+        //    // Act
+        //    var result = cartonController.Index() as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void Details_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void Details_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.Details(_cartonId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.Details(_cartonId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void Create_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void Create_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.Create() as ViewResult;
+        //    // Act
+        //    var result = cartonController.Create() as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void Edit_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void Edit_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.Edit(_cartonId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.Edit(_cartonId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void Delete_ReturnsView_Result()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void Delete_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.Delete(_cartonId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.Delete(_cartonId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void ListAvailableEquipment_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void ListAvailableEquipment_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.ListAvailableEquipment(_cartonId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.ListAvailableEquipment(_cartonId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void AddEquipment_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void AddEquipment_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.AddEquipment(_cartonId, _equipmentId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.AddEquipment(_cartonId, _equipmentId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void ListAddedEquipment_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void ListAddedEquipment_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.ListAddedEquipment(_cartonId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.ListAddedEquipment(_cartonId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
-        [TestMethod]
-        public void RemoveEquipment_Returns_ViewResult()
-        {
-            // Arrage
-            var cartonController = new CartonController();
+        //[TestMethod]
+        //public void RemoveEquipment_ReturnsViewResult()
+        //{
+        //    // Arrage
+        //    var cartonController = new CartonController();
 
-            // Act
-            var result = cartonController.RemoveEquipment(_cartonId, _equipmentId) as ViewResult;
+        //    // Act
+        //    var result = cartonController.RemoveEquipment(_cartonId, _equipmentId) as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
 
     }
 }

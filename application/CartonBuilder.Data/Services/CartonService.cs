@@ -5,7 +5,7 @@ using System;
 
 namespace CartonBuilder.Data.Services
 {
-    public class CartonService
+    public class CartonService : ICartonService
     {
         /// <summary>
         /// Lists all the cartons currently in the data store.

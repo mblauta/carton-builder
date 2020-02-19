@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CartonBuilder.Data.Services
 {
-    public class EquipmentService
+    public class EquipmentService : IEquipmentService
     {
         /// <summary>
         /// Gets the equipment that matches the given ID.
