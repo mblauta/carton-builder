@@ -17,11 +17,11 @@ Once the solution compiled successfully, you should see the Carton Builder web a
 
 ### File Not Found Exception Encountered
 
-Running the application yields the following exception:
+Running the application for the first time yields the following exception:
 
-```Exception Details: System.IO.FileNotFoundException: Could not find file 'C:\carton-builder\bin\roslyn\csc.exe'.```
+```Exception Details: System.IO.FileNotFoundException: Could not find file 'C:\carton-builder\application\CartonBuilder.Web\bin\roslyn\csc.exe'.```
 
-Open the Package Manager Console in Visual Studio and execute the following command:
+**FIX:** Open the Package Manager Console in Visual Studio and execute the following command:
 
 ```Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r```
 
