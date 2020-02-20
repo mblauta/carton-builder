@@ -18,6 +18,12 @@ namespace CartonBuilder.Common.Interfaces
         void RemoveCartonDetail(CartonDetail cartonDetail);
 
         /// <summary>
+        /// Removes all carton detail records having the given carton ID.
+        /// </summary>
+        /// <param name="cartonId">Carton ID to filter by.</param>
+        void RemoveCartonDetailByCartonId(int cartonId);
+
+        /// <summary>
         /// Adds an equipment to the carton specified.
         /// </summary>
         /// <param name="cartonId">The ID of the carton to add to.</param>

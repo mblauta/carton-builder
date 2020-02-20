@@ -1,6 +1,7 @@
 ﻿using CartonBuilder.Common.Interfaces;
 using CartonBuilder.Common.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CartonBuilder.Data.Services
@@ -58,6 +59,22 @@ namespace CartonBuilder.Data.Services
                 if (cartonDetailEntityModel == null) return;
 
                 warehouseContext.CartonDetails.Remove(cartonDetailEntityModel);
+                warehouseContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Removes all carton detail records having the given carton ID.
+        /// </summary>
+        /// <param name="cartonId">Carton ID to filter by.</param>
+        public void RemoveCartonDetailByCartonId(int cartonId)
+        {
+            using (var warehouseContext = new WarehouseContext())
+            {
+                warehouseContext.CartonDetails
+                    .Where(cd => cd.CartonId == cartonId)
+                    .ToList()
+                    .ForEach(cd => warehouseContext.CartonDetails.Remove(cd));
                 warehouseContext.SaveChanges();
             }
         }

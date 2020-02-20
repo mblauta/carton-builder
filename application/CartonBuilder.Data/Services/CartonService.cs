@@ -109,6 +109,10 @@ namespace CartonBuilder.Data.Services
         /// <param name="cartonId">ID of carton to remove.</param>
         public void RemoveCarton(int cartonId)
         {
+            // Make sure to empty carton first before deleting...
+            var cartonDetailService = new CartonDetailService();
+            cartonDetailService.RemoveCartonDetailByCartonId(cartonId);
+
             using (var warehouseContext = new WarehouseContext())
             {
                 EntityModels.Carton cartonEntityModel = warehouseContext.Cartons.Find(cartonId);
