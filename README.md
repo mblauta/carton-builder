@@ -7,7 +7,7 @@
 1. Locate the solution file `CartonBuilder.sln` and double-click. *This will load the solution in Visual Studio.*
 1. Once loaded, hit `F5` to run the application.
 
-Once the solution compiled successfully, you should see the Carton Builder web application shortly.
+Once the solution compiled successfully, the Carton Builder web application will launch shortly.
 
 ## Warehouse Database ERD
 
@@ -26,3 +26,5 @@ Running the application for the first time yields the following exception:
 ```Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r```
 
 This will install or upgrade the .NET compiler.
+
+*NOTE: The Package Manager Console is found by navigating from the main menu to `Tools > NuGet Package Manager > Package Manager Console`.*
