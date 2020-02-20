@@ -60,6 +60,10 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CartonControllerTest.cs" />
@@ -70,6 +74,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CartonBuilder.Interfaces\CartonBuilder.Interfaces.csproj">
+      <Project>{8f8612ee-f675-4a41-a79d-ede985ac1ad1}</Project>
+      <Name>CartonBuilder.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CartonBuilder.Models\CartonBuilder.Models.csproj">
+      <Project>{18F9DC02-2322-4A39-8E95-5DEABE9E71A2}</Project>
+      <Name>CartonBuilder.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CartonBuilder.Web\CartonBuilder.Web.csproj">
       <Project>{90203b59-671a-4911-b1d0-76fc2f003bdf}</Project>
       <Name>CartonBuilder.Web</Name>
