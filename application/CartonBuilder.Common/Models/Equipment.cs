@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CartonBuilder.Models
+namespace CartonBuilder.Common.Models
 {
     public class Equipment
     {

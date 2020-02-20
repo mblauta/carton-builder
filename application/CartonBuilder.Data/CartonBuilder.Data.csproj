@@ -90,13 +90,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CartonBuilder.Interfaces\CartonBuilder.Interfaces.csproj">
-      <Project>{8f8612ee-f675-4a41-a79d-ede985ac1ad1}</Project>
-      <Name>CartonBuilder.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CartonBuilder.Models\CartonBuilder.Models.csproj">
+    <ProjectReference Include="..\CartonBuilder.Common\CartonBuilder.Common.csproj">
       <Project>{18f9dc02-2322-4a39-8e95-5deabe9e71a2}</Project>
-      <Name>CartonBuilder.Models</Name>
+      <Name>CartonBuilder.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

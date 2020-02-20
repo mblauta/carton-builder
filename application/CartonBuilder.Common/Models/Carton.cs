@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace CartonBuilder.Models
+namespace CartonBuilder.Common.Models
 {
     public class Carton
     {

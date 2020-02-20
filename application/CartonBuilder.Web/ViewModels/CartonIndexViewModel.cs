@@ -1,4 +1,4 @@
-﻿using CartonBuilder.Models;
+﻿using CartonBuilder.Common.Models;
 using System.Collections.Generic;
 
 namespace CartonBuilder.Web.ViewModels

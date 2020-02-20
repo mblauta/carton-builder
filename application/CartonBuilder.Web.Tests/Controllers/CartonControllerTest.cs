@@ -1,5 +1,5 @@
-﻿using CartonBuilder.Interfaces;
-using CartonBuilder.Models;
+﻿using CartonBuilder.Common.Interfaces;
+using CartonBuilder.Common.Models;
 using CartonBuilder.Web.Controllers;
 using CartonBuilder.Web.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

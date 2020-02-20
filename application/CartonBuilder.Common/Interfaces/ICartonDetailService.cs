@@ -1,6 +1,6 @@
-﻿using CartonBuilder.Models;
+﻿using CartonBuilder.Common.Models;
 
-namespace CartonBuilder.Interfaces
+namespace CartonBuilder.Common.Interfaces
 {
     public interface ICartonDetailService
     {
