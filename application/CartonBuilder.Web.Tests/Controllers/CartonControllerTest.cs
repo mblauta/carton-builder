@@ -12,15 +12,18 @@ namespace CartonBuilder.Web.Tests.Controllers
     [TestClass]
     public class CartonControllerTest
     {
-        private readonly int _cartonId = 111;
-        private readonly string _cartonNumber = "111A-TEST";
-        private readonly int _equipmentId = 222;
-        private readonly int _cartonDetailId = 333;
-        private readonly bool _returnNull = true;
+        // Magic numbers...
+        private const int CartonId = 111;
+        private const string CartonNumber = "111A-TEST";
+        private const int EquipmentId = 222;
+        private const int CartonDetailId = 333;
+        private const bool ReturnNull = true;
 
+        // Mock services...
         private Mock<ICartonService> _mockCartonService;
         private Mock<IEquipmentService> _mockEquipmentService;
         private Mock<ICartonDetailService> _mockCartonDetailService;
+
 
         [TestInitialize]
         public void InstantiateServices()
@@ -66,7 +69,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.Details(_cartonId) as ViewResult;
+            var result = cartonController.Details(CartonId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -76,12 +79,12 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void Details_WithCartonNotFound_ReturnsHttpNotFoundResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.Details(_cartonId) as HttpNotFoundResult;
+            var result = cartonController.Details(CartonId) as HttpNotFoundResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -140,7 +143,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.Edit(_cartonId) as ViewResult;
+            var result = cartonController.Edit(CartonId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -186,7 +189,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.Delete(_cartonId) as ViewResult;
+            var result = cartonController.Delete(CartonId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -196,12 +199,12 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void Delete_WithCartonNotFound_ReturnsHttpNotFoundResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.Delete(_cartonId) as HttpNotFoundResult;
+            var result = cartonController.Delete(CartonId) as HttpNotFoundResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -217,7 +220,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.DeleteConfirmed(_cartonId) as RedirectToRouteResult;
+            var result = cartonController.DeleteConfirmed(CartonId) as RedirectToRouteResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -233,7 +236,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.ListAvailableEquipment(_cartonId) as ViewResult;
+            var result = cartonController.ListAvailableEquipment(CartonId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -243,13 +246,13 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void ListAvailableEquipment_WithCartonNotFound_ReturnsHttpNotFoundResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
             SetupEquipmentServiceListAvailableEquipmentForCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.ListAvailableEquipment(_cartonId) as HttpNotFoundResult;
+            var result = cartonController.ListAvailableEquipment(CartonId) as HttpNotFoundResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -266,7 +269,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.AddEquipment(_cartonId, _equipmentId) as RedirectToRouteResult;
+            var result = cartonController.AddEquipment(CartonId, EquipmentId) as RedirectToRouteResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -276,14 +279,14 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void AddEquipment_WithCartonNotFound_ReturnsHttpStatusCodeResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
             SetupEquipmentServiceGetEquipment();
             SetupCartonDetailServiceAddEquipmentToCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.AddEquipment(_cartonId, _equipmentId) as HttpStatusCodeResult;
+            var result = cartonController.AddEquipment(CartonId, EquipmentId) as HttpStatusCodeResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -294,13 +297,13 @@ namespace CartonBuilder.Web.Tests.Controllers
         {
             // Arrage
             SetupCartonServiceGetCarton();
-            SetupEquipmentServiceGetEquipment(_returnNull);
+            SetupEquipmentServiceGetEquipment(ReturnNull);
             SetupCartonDetailServiceAddEquipmentToCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.AddEquipment(_cartonId, _equipmentId) as HttpStatusCodeResult;
+            var result = cartonController.AddEquipment(CartonId, EquipmentId) as HttpStatusCodeResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -316,7 +319,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.ListAddedEquipment(_cartonId) as ViewResult;
+            var result = cartonController.ListAddedEquipment(CartonId) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -326,13 +329,13 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void ListAddedEquipment_WithCartonNotFound_ReturnsHttpStatusCodeResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
             SetupEquipmentServiceListAddedEquipmentForCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.ListAddedEquipment(_cartonId) as HttpStatusCodeResult;
+            var result = cartonController.ListAddedEquipment(CartonId) as HttpStatusCodeResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -349,7 +352,7 @@ namespace CartonBuilder.Web.Tests.Controllers
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.RemoveEquipment(_cartonId, _equipmentId) as RedirectToRouteResult;
+            var result = cartonController.RemoveEquipment(CartonId, EquipmentId) as RedirectToRouteResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -359,14 +362,14 @@ namespace CartonBuilder.Web.Tests.Controllers
         public void RemoveEquipment_WithCartonNotFound_ReturnsHttpStatusCodeResult()
         {
             // Arrage
-            SetupCartonServiceGetCarton(_returnNull);
+            SetupCartonServiceGetCarton(ReturnNull);
             SetupEquipmentServiceGetEquipment();
             SetupCartonDetailServiceRemoveEquipmentFromCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.RemoveEquipment(_cartonId, _equipmentId) as HttpStatusCodeResult;
+            var result = cartonController.RemoveEquipment(CartonId, EquipmentId) as HttpStatusCodeResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -377,13 +380,13 @@ namespace CartonBuilder.Web.Tests.Controllers
         {
             // Arrage
             SetupCartonServiceGetCarton();
-            SetupEquipmentServiceGetEquipment(_returnNull);
+            SetupEquipmentServiceGetEquipment(ReturnNull);
             SetupCartonDetailServiceRemoveEquipmentFromCarton();
 
             var cartonController = new CartonController(_mockCartonService.Object, _mockEquipmentService.Object, _mockCartonDetailService.Object);
 
             // Act
-            var result = cartonController.RemoveEquipment(_cartonId, _equipmentId) as HttpStatusCodeResult;
+            var result = cartonController.RemoveEquipment(CartonId, EquipmentId) as HttpStatusCodeResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -434,7 +437,7 @@ namespace CartonBuilder.Web.Tests.Controllers
         {
             _mockCartonDetailService
                 .Setup(cds => cds.AddEquipmentToCarton(It.IsAny<int>(), It.IsAny<int>()))
-                .Returns(_cartonDetailId);
+                .Returns(CartonDetailId);
         }
 
         private void SetupEquipmentServiceListAddedEquipmentForCarton()
@@ -454,8 +457,8 @@ namespace CartonBuilder.Web.Tests.Controllers
         {
             return new CartonCreateViewModel()
             {
-                Id = _cartonId,
-                CartonNumber = _cartonNumber
+                Id = CartonId,
+                CartonNumber = CartonNumber
             };
         }
 
@@ -463,8 +466,8 @@ namespace CartonBuilder.Web.Tests.Controllers
         {
             return new CartonEditViewModel()
             {
-                Id = _cartonId,
-                CartonNumber = _cartonNumber
+                Id = CartonId,
+                CartonNumber = CartonNumber
             };
         }
 
